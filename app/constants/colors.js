@@ -1,0 +1,35 @@
+export const COLOR_PRIMARY = '#ffbc07';
+export const COLOR_PRIMARY_OPACY = 'rgba(0, 62, 101, 0.9)';
+export const COLOR_SECONDARY = '#D82200';
+export const COLOR_SECONDARY_OPACY = '#0e2a39';
+export const COLOR_BLUE_LINK = '#009fe3';
+export const COLOR_WHITE = '#f6f6f6';
+export const COLOR_GREEN = '#13A68E';
+export const COLOR_GREEN_LIGHT = '#00aa00';
+export const COLOR_GREEN_OPACY = 'rgba(142, 196, 73, 0.2)';
+export const COLOR_GREEN_ICONS = '#bfbf66'
+export const COLOR_RED = '#ff3300';
+export const COLOR_RED_OPACY = 'rgba(255, 51, 0, 0.2)';
+export const COLOR_ORANGE = '#f27930';
+export const COLOR_YELLOW = '#ffcc00';
+export const COLOR_YELLOW_OPACY = 'rgba(255, 204, 0, 0.2)';
+export const COLOR_GRAY = '#292d3f';//'#686868';
+export const COLOR_GRAY_MEDIUM = '#edeef0';
+export const COLOR_GRAY_BORDER = '#fff';
+export const COLOR_GRAY_LIGHT = '#f8fafb';
+export const COLOR_GRAY_LIGHT2 = '#edeef0';
+export const COLOR_GRAY_DRAK = '#494d52';
+export const COLOR_TOP_SAFE_AREA = COLOR_GRAY_LIGHT;
+export const COLOR_BOTTOM_SAFE_AREA = '#DD1C15';
+export const COLOR_BOTTOM_SAFE_AREA_2 = '#FFBA41';
+export const FONT_NORMAL = 'OpenSans-Regular';
+export const FONT_BOLD = 'OpenSans-Bold';
+export const BORDER_RADIUS = 4;
+export const FONT_SIZE = 15;
+export const COLOR_WHITE_W = '#ffffff';
+export const COLOR_test = '#0097A7';
+export const COLOR_PURPLE = "#9673A6";
+
+//Estilos de supercade redesing
+export const COLOR_BLUE_DARK = '#4c4e53';
+export const COLOR_GRAY_BORDER_CARD = '#d8d9dd'
