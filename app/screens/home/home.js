@@ -8,13 +8,25 @@ class Home extends Component {
         super(props);
     }
 
+    goToLogin(){
+        this.props.navigation.navigate('login');
+    }
+
+    goToSocialNetwork(){
+        this.props.navigation.navigate('socialNetwork');
+    }
+
     render() {
         return(
             <SafeAreaView style={styles.safeArea}>
                 <View style={{ flex: 1 }}>
-                    <TouchableOpacity style={[styles.touchableLarge, {backgroundColor:COLOR_GREEN_LIGHT}]}><Text style={styles.text}>Tu Salud</Text></TouchableOpacity>
+                    <TouchableOpacity 
+                        onPress={() => this.goToLogin()} 
+                        style={[styles.touchableLarge, {backgroundColor:COLOR_GREEN_LIGHT}]}><Text style={styles.text}>Tu Salud</Text></TouchableOpacity>
                     <View style={{ flex: 1, flexDirection:"row", backgroundColor: COLOR_WHITE_W }}>
-                        <TouchableOpacity style={[styles.touchableShort, {backgroundColor: COLOR_BLUE_LINK }]}><Text style={styles.text}>Red Social</Text></TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.goToSocialNetwork()} 
+                            style={[styles.touchableShort, {backgroundColor: COLOR_BLUE_LINK }]}><Text style={styles.text}>Red Social</Text></TouchableOpacity>
                         <TouchableOpacity style={[styles.touchableShort, { backgroundColor: COLOR_ORANGE, marginRight: 10 }]}><Text style={styles.text}>Rutas</Text></TouchableOpacity>
                     </View >
                     <TouchableOpacity style={[styles.touchableLarge, {backgroundColor:COLOR_PURPLE}]}><Text style={styles.text}>Eventos</Text></TouchableOpacity>

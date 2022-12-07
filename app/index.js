@@ -6,6 +6,8 @@ import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { COLOR_GRAY } from './constants/colors';
 import Home from './screens/home/home';
+import Login from './screens/login/login';
+import SocialNetwork from './screens/socialNetwork/socialNetwork';
 
 const Stack = createNativeStackNavigator();
 // const store = configureStore();
@@ -36,6 +38,8 @@ class App extends Component {
 
                         {/* login */}
                         <Stack.Screen name="home" component={Home}/>
+                        <Stack.Screen name="login" component={Login}/>
+                        <Stack.Screen name="socialNetwork" component={SocialNetwork}/>
               
                     {/* </Scene> */}
                     </Stack.Navigator>
