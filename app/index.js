@@ -37,9 +37,9 @@ class App extends Component {
                         />
 
                         {/* login */}
-                        <Stack.Screen name="home" component={Home}/>
+                        {/* <Stack.Screen name="home" component={Home}/> */}
                         <Stack.Screen name="login" component={Login}/>
-                        <Stack.Screen name="socialNetwork" component={SocialNetwork}/>
+                        {/* <Stack.Screen name="socialNetwork" component={SocialNetwork}/> */}
               
                     {/* </Scene> */}
                     </Stack.Navigator>

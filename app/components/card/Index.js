@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { COLOR_BLUE_DARK, COLOR_BLUE_LINK, COLOR_GREEN_LIGHT, COLOR_ORANGE, COLOR_PURPLE, COLOR_WHITE_W,  } from "../../constants/colors";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { COLOR_BLACK, COLOR_GRAY_MEDIUM, COLOR_PRIMARY, COLOR_WHITE_W,  } from "../../constants/colors";
 
 class Card extends Component {
 
@@ -10,17 +10,55 @@ class Card extends Component {
 
     render() {
         return(
-            <View style={{ flex: 1 }}>
-                <View style={{ flex: 1, flexDirection:"row", backgroundColor: COLOR_WHITE_W }}>
-                    <TouchableOpacity style={[styles.touchableShort, {backgroundColor: COLOR_BLUE_LINK }]}><Text style={styles.text}>Red Social</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.touchableShort, { backgroundColor: COLOR_ORANGE, marginRight: 10 }]}><Text style={styles.text}>Rutas</Text></TouchableOpacity>
-                </View >
-                <TouchableOpacity style={[styles.touchableLarge, {backgroundColor:COLOR_GREEN_LIGHT}]}><Text style={styles.text}>Tu Salud</Text></TouchableOpacity>
-                <View style={{ flex: 1, flexDirection:"row", backgroundColor: COLOR_WHITE_W }}>
-                    <TouchableOpacity style={[styles.touchableShort, {backgroundColor: COLOR_BLUE_LINK }]}><Text style={styles.text}>Red Social</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.touchableShort, { backgroundColor: COLOR_ORANGE, marginRight: 10 }]}><Text style={styles.text}>Rutas</Text></TouchableOpacity>
-                </View >
-                <TouchableOpacity style={[styles.touchableLarge, {backgroundColor:COLOR_PURPLE}]}><Text style={styles.text}>Eventos</Text></TouchableOpacity>
+            <View key={this.props.key} style={[styles.shadow, styles.container]}>
+                <View style={styles.header}>
+                    <View style={styles.flexRow}>
+                        <Image
+                            style={styles.imageUser}
+                            source={require('../../images/user.png')}
+                        />
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.title}>{this.props.user.name}</Text>
+                            <Text style={styles.subtitle}>{this.props.user.typeCyclist}</Text>
+                        </View>
+                    </View>
+                    <TouchableOpacity 
+                        style={styles.touchFollow}
+                        onPress={() => this.props.navigation.openDrawer()}>
+                        <Text style={styles.textFollow}>Seguir</Text>
+                    </TouchableOpacity>
+                </View>
+                <Image
+                    style={styles.imagePublication}
+                    source={{uri: this.props.image}}
+                />
+                <Text>{this.props.description}</Text>
+                <View style={styles.flexRow}>
+                    <TouchableOpacity 
+                        onPress={this.props.onPress} 
+                        style={[styles.shadow, styles.touchCircleButton]}>
+                        <Image
+                            style={styles.imageCircleButton}
+                            source={require('../../images/hearth.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        onPress={this.props.onPress} 
+                        style={[styles.shadow, styles.touchCircleButton]}>
+                        <Image
+                            style={styles.imageCircleButton}
+                            source={require('../../images/share.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        onPress={this.props.onPress} 
+                        style={[styles.shadow, styles.touchCircleButton]}>
+                        <Image
+                            style={styles.imageCircleButton}
+                            source={require('../../images/speech-bubble.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -29,46 +67,33 @@ class Card extends Component {
 export default Card;
 
 const styles = StyleSheet.create({
-    safeArea:{
-        flex: 1, 
-        backgroundColor: COLOR_WHITE_W
+    shadow: {
+        shadowOffset: {width: -2, height: 4},  
+        shadowColor: '#000000',  
+        shadowOpacity: 0.2,  
+        shadowRadius: 3, 
+        backgroundColor: 'white',  
+        elevation: 20
     },
-    viewGeneral: {
-        flex: 1
+    container:{
+        borderRadius: 5,
+        padding:10,
+        margin:10
     },
-    touchableLarge: {
-        margin:10,
-        flex: 1,
-        alignItems:"center",
-        justifyContent:"center",
-        borderWidth: 2,
-        borderColor: "#edeef0",
-        shadowColor: "#edeef0",
-        shadowOffset: {
-            width: 2,
-            height: -2
-        },
-        elevation: 5,
-        padding: 10
+    header: {flex:1, flexDirection:"row", alignItems:"center", justifyContent:"space-between", marginBottom:5},
+    flexRow: {flexDirection:"row"},
+    imageUser: {width: 20, height: 20, borderRadius: 50, backgroundColor: COLOR_GRAY_MEDIUM, padding:18},
+    containerTitle: {marginLeft:10},
+    title: {fontSize:12, color:COLOR_BLACK},
+    subtitle: {fontSize:10},
+    touchFollow: {backgroundColor:COLOR_PRIMARY, borderRadius:5, paddingHorizontal:10, paddingVertical:5},
+    textFollow: {color:COLOR_WHITE_W},
+    imagePublication: {width:"100%", height:150, marginBottom:5},
+    touchCircleButton: {
+        borderRadius: 30,
+        padding:10,
+        margin:5
     },
-    touchableShort: {
-        marginLeft:10,
-        flex: 1,
-        alignItems:"center",
-        justifyContent:"center",
-        borderWidth: 2,
-        borderColor: "#edeef0",
-        shadowColor: "#edeef0",
-        shadowOffset: {
-            width: 2,
-            height: -2
-        },
-        elevation: 5,
-        padding: 10
-    },
-    text:{
-        fontSize:30,
-        color: COLOR_WHITE_W
-    }
+    imageCircleButton: {width: 20, height: 20}
     
 })

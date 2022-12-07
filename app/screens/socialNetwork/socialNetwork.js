@@ -1,86 +1,53 @@
 import { Component } from "react";
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import Card from "../../components/card/Index";
+import Header from "../../components/header/Index";
+import LargeButton from "../../components/largeButton/Index";
 import { COLOR_WHITE_W } from "../../constants/colors";
+import database from '@react-native-firebase/database';
 
 class SocialNetwork extends Component {
 
     constructor(props){
         super(props);
+        this.state={
+            publications:[]
+        }
+    }
+
+    componentDidMount(){
+        database()
+        .ref('/publications')
+        .once('value')
+        .then(snapshot => {
+            console.log('User data: ', snapshot.val());
+            this.setState({publications: snapshot.val()});
+        })
+    }
+
+    cards = () => {
+        return (
+            this.state.publications.map((publication, index) => (
+                <Card 
+                    key = {index}
+                    user={publication.user}
+                    image={publication.image}
+                    description={publication.description}
+                    navigation={this.props.navigation}
+                />
+            ))
+        )
     }
 
     render() {
         return(
             <SafeAreaView style={{ flex: 1, backgroundColor: COLOR_WHITE_W }}>
                 <ScrollView>
-                    <View>
-                        <View style={{flex:1, flexDirection:"row"}}>
-                            <Image
-                                style={{width: 20, height: 20}}
-                                source={require('../../images/user.png')}
-                            />
-                            <Text>Janet Perkins</Text>
-                            <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
-                                <Image
-                                    style={{width: 20, height: 20}}
-                                    source={require('../../images/menu.png')}
-                                ></Image>
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <TouchableOpacity><Text>Crear publicación</Text></TouchableOpacity>
-                            <TouchableOpacity>
-                                <Image
-                                    style={{width: 20, height: 20}}
-                                    source={require('../../images/mas.png')}
-                                ></Image>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View>
-                        <View style={{flex:1, flexDirection:"row"}}>
-                            <Image
-                                style={{width: 20, height: 20}}
-                                source={require('../../images/user.png')}
-                            />
-                            <View>
-                                <Text>Janet Perkins</Text>
-                                <Text>Janet Perkins</Text>
-                            </View>
-                            <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
-                                <Text>Seguir</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <Image>
-
-                        </Image>
-                        <Text>Greyhound divisively hello couldly wonderfully marginally far upon excluding.</Text>
-                        <View style={{flexDirection:'row'}}>
-                            <TouchableOpacity 
-                                onPress={this.props.onPress} 
-                                style={this.props.styleContent}>
-                                <Image
-                                    style={{width: 20, height: 20}}
-                                    source={require('../../images/mas.png')}
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={this.props.onPress} 
-                                style={this.props.styleContent}>
-                                <Image
-                                    style={{width: 20, height: 20}}
-                                    source={require('../../images/mas.png')}
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={this.props.onPress} 
-                                style={this.props.styleContent}>
-                                <Image
-                                    style={{width: 20, height: 20}}
-                                    source={require('../../images/mas.png')}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    <Header 
+                        navigation={this.props.navigation}    
+                    />
+                    <LargeButton/>
+                    {this.cards()}
                 </ScrollView>
             </SafeAreaView>
         );
@@ -90,5 +57,5 @@ class SocialNetwork extends Component {
 export default SocialNetwork;
 
 const styles = StyleSheet.create({
-
+    
 })

@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
-import { View, StyleSheet, PixelRatio, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, PixelRatio, TouchableOpacity, Text } from 'react-native';
 import Home from "../../screens/home/home";
 import SocialNetwork from "../../screens/socialNetwork/socialNetwork";
 import { COLOR_GRAY, COLOR_GRAY_DRAK, COLOR_SECONDARY } from "../../constants/colors";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import CustomIcon from "../customIcons/Index";
+const Stack = createNativeStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
@@ -22,7 +24,7 @@ class DrawerOptions extends Component {
                 <View style={{flex:1, flexDirection:'column'}}>
                     <Text style={styles.text_title}>Invitado SuperCADE</Text>
                     <TouchableOpacity
-                        onPress= { () => this.props.navigation.navigate('containerGabo')}
+                        onPress= { () => {}}
                         style={{ width: '100%', flexDirection: 'row', alignItems:'center', marginBottom:5, marginTop: 10 }}>
                         <View style={{ width: 60, height: 40, alignSelf: 'flex-start', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             {/* <CustomIcon name='home_red' style={{ width: 31, height: 30, marginLeft:5 }} /> */}
@@ -30,7 +32,7 @@ class DrawerOptions extends Component {
                         <Text style={{fontSize: 15, textAlignVertical: 'center'}}>Inicio</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress= { () => this.props.navigation.navigate('micuenta')}
+                        onPress= { () => {}}
                         style={{ width: '100%', flexDirection: 'row', alignItems:'center', marginBottom:5 }}>
                         <View style={{ width: 60, height: 40, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
                             {/* <CustomIcon name='micuenta' style={{ width: 46, height: 30 }} /> */}
@@ -43,7 +45,7 @@ class DrawerOptions extends Component {
 
     render () {
         return(
-            <Drawer.Navigator drawerContent={(props) => this.CustomDrawerContent(props)} screenOptions={{headerShown: false, gestureEnabled: true}}>
+            <Drawer.Navigator drawerContent={(props) => this.CustomDrawerContent(props)} screenOptions={{headerShown: false, gestureEnabled: true, drawerPosition:"right"}}>
                 <Stack.Screen name="home" component={Home}/>
                 <Drawer.Screen name="socialNetwork" component={SocialNetwork}/>
             </Drawer.Navigator>
