@@ -7,7 +7,7 @@ import { COLOR_WHITE_W } from "../../constants/colors";
 import database from '@react-native-firebase/database';
 import { connect } from "react-redux";
 
-class SocialNetwork extends Component {
+class MyPublications extends Component {
 
     constructor(props){
         super(props);
@@ -18,7 +18,7 @@ class SocialNetwork extends Component {
 
     componentDidMount(){
         database()
-        .ref('/publications')
+        .ref('/users/'+this.props.user.username+"/publications")
         .once('value')
         .then(snapshot => {
             console.log('User data: ', snapshot.val());
@@ -37,6 +37,7 @@ class SocialNetwork extends Component {
                     isLoggedIn={this.props.user.isLoggedIn}
                     premium={this.props.user.premium}
                     navigation={this.props.navigation}
+                    myPublication={true}
                 />
             ))
         )
@@ -67,7 +68,7 @@ const mapStateToProps = (state) => {
     };
   }
 
-export default connect(mapStateToProps)(SocialNetwork);
+export default connect(mapStateToProps)(MyPublications);
 
 const styles = StyleSheet.create({
     

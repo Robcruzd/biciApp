@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerOptions from './components/drawer/drawer';
 import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { COLOR_GRAY } from './constants/colors';
-import Home from './screens/home/home';
 import Login from './screens/login/login';
-import SocialNetwork from './screens/socialNetwork/socialNetwork';
+import { Provider } from 'react-redux';
+import configureStore from './redux/store/configureStore';
 
+const store = configureStore();
 const Stack = createNativeStackNavigator();
 // const store = configureStore();
 
@@ -25,7 +24,7 @@ class App extends Component {
     render () {
         return (
             // <SafeAreaView style={styles.safeArea}>
-            // <Provider>
+            <Provider store={store}>
                 <NavigationContainer>
                     <Stack.Navigator initialRouteName="home" screenOptions={{headerShown: false, gestureEnabled: true}}>
                     {/* <Scene key="root" navigationBarStyle={styles.navigationBarStyle}> */}
@@ -44,7 +43,7 @@ class App extends Component {
                     {/* </Scene> */}
                     </Stack.Navigator>
                 </NavigationContainer>
-            // </Provider>
+            </Provider>
             // </SafeAreaView>
         );
     }

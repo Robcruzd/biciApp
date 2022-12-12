@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { connect } from "react-redux";
 import { COLOR_GRAY_MEDIUM, COLOR_PRIMARY, COLOR_WHITE_W } from "../../constants/colors";
 
 const menu = require('../../images/menu.png');
@@ -14,11 +15,14 @@ class Header extends Component {
         return(
             <View 
                 style={styles.viewComponent}>
-                <Image
-                    style={styles.image}
-                    source={user}
-                />
-                <Text style={styles.textTitle}>Janet Perkins</Text>
+                {this.props.user.isLoggedIn ?
+                    <Image
+                        style={styles.image}
+                        source={user}
+                    />:<View/>
+                }
+                {console.log("user header: ", this.props.user)}
+                <Text style={styles.textTitle}>{this.props.user.name}</Text>
                 <TouchableOpacity 
                     onPress={() => this.props.navigation.openDrawer()}>
                     <Image
@@ -31,11 +35,18 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth
+    };
+  }
+
+export default connect(mapStateToProps)(Header);
+
 
 const styles = StyleSheet.create({
     viewComponent: {
-        flex:1, 
+        flex:0, 
         flexDirection:"row", 
         backgroundColor:COLOR_PRIMARY, 
         height:60, 

@@ -12,53 +12,86 @@ class Card extends Component {
         return(
             <View key={this.props.key} style={[styles.shadow, styles.container]}>
                 <View style={styles.header}>
-                    <View style={styles.flexRow}>
-                        <Image
-                            style={styles.imageUser}
-                            source={require('../../images/user.png')}
-                        />
-                        <View style={styles.containerTitle}>
-                            <Text style={styles.title}>{this.props.user.name}</Text>
-                            <Text style={styles.subtitle}>{this.props.user.typeCyclist}</Text>
-                        </View>
-                    </View>
-                    <TouchableOpacity 
-                        style={styles.touchFollow}
-                        onPress={() => this.props.navigation.openDrawer()}>
-                        <Text style={styles.textFollow}>Seguir</Text>
-                    </TouchableOpacity>
+                    {this.props.user ?
+                        <View style={styles.flexRow}>
+                            <Image
+                                style={styles.imageUser}
+                                source={require('../../images/user.png')}
+                            />
+                            <View style={styles.containerTitle}>
+                                <Text style={styles.title}>{this.props.user.name}</Text>
+                                <Text style={styles.subtitle}>{this.props.user.typeCyclist}</Text>
+                            </View>
+                        </View>:
+                        <View/>
+                    }
+                    {this.props.user && this.props.isLoggedIn ?
+                        <TouchableOpacity 
+                            style={styles.touchFollow}
+                            onPress={() => this.props.navigation.openDrawer()}>
+                            <Text style={styles.textFollow}>Seguir</Text>
+                        </TouchableOpacity>: null
+                    }
+                    {!this.props.user ?
+                        <TouchableOpacity 
+                            onPress={this.props.onPress} 
+                            style={[styles.shadow, styles.touchCircleButtonEdit]}>
+                            <Image
+                                style={styles.imageCircleButton}
+                                source={require('../../images/pencil.png')}
+                            />
+                        </TouchableOpacity>:null
+                    }
                 </View>
                 <Image
                     style={styles.imagePublication}
                     source={{uri: this.props.image}}
                 />
                 <Text>{this.props.description}</Text>
-                <View style={styles.flexRow}>
-                    <TouchableOpacity 
-                        onPress={this.props.onPress} 
-                        style={[styles.shadow, styles.touchCircleButton]}>
-                        <Image
-                            style={styles.imageCircleButton}
-                            source={require('../../images/hearth.png')}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        onPress={this.props.onPress} 
-                        style={[styles.shadow, styles.touchCircleButton]}>
-                        <Image
-                            style={styles.imageCircleButton}
-                            source={require('../../images/share.png')}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        onPress={this.props.onPress} 
-                        style={[styles.shadow, styles.touchCircleButton]}>
-                        <Image
-                            style={styles.imageCircleButton}
-                            source={require('../../images/speech-bubble.png')}
-                        />
-                    </TouchableOpacity>
-                </View>
+                {this.props.isLoggedIn ?
+                    <View style={styles.flexRow}>
+                        <TouchableOpacity 
+                            onPress={this.props.onPress} 
+                            style={[styles.shadow, styles.touchCircleButton]}>
+                            <Image
+                                style={styles.imageCircleButton}
+                                source={require('../../images/hearth.png')}
+                            />
+                        </TouchableOpacity>
+                        {this.props.premium ?
+                            <View style={[styles.flexRow, styles.justify]}>
+                                <View style={styles.flexRow}>
+                                    <TouchableOpacity 
+                                        onPress={this.props.onPress} 
+                                        style={[styles.shadow, styles.touchCircleButton]}>
+                                        <Image
+                                            style={styles.imageCircleButton}
+                                            source={require('../../images/share.png')}
+                                        />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity 
+                                        onPress={this.props.onPress} 
+                                        style={[styles.shadow, styles.touchCircleButton]}>
+                                        <Image
+                                            style={styles.imageCircleButton}
+                                            source={require('../../images/speech-bubble.png')}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                                {this.props.myPublication ?
+                                    <TouchableOpacity 
+                                        onPress={this.props.onPress} 
+                                        style={[styles.shadow, styles.touchCircleButtonRem]}>
+                                        <Image
+                                            style={styles.imageCircleButtonRem}
+                                            source={require('../../images/remove.png')}
+                                        />
+                                    </TouchableOpacity>: null
+                                }                                
+                            </View>:null
+                        }
+                    </View>: null
+                }
             </View>
         );
     }
@@ -94,6 +127,22 @@ const styles = StyleSheet.create({
         padding:10,
         margin:5
     },
-    imageCircleButton: {width: 20, height: 20}
+    imageCircleButton: {width: 20, height: 20},
+    touchCircleButtonEdit: {
+        borderRadius: 30,
+        padding:10,
+        margin:5, 
+        alignSelf:"flex-end"
+    },
+    touchCircleButtonRem: {
+        borderRadius: 30,
+        padding:0,
+        margin:5, 
+        // alignSelf:"flex-end",
+        // justifySelft: "end",
+        marginLeft:"auto"
+    },
+    imageCircleButtonRem: {width: 40, height: 40},
+    justify: {flex:1, justifyContent:"space-between"}
     
 })

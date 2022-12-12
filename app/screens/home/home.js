@@ -1,11 +1,17 @@
 import { Component } from "react";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { COLOR_BLUE_DARK, COLOR_BLUE_LINK, COLOR_GRAY, COLOR_GREEN, COLOR_GREEN_LIGHT, COLOR_ORANGE, COLOR_PURPLE, COLOR_WHITE_W, COLOR_YELLOW } from "../../constants/colors";
+import { Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Header from "../../components/header/Index";
+import { COLOR_BLUE_LINK, COLOR_GREEN_LIGHT, COLOR_ORANGE, COLOR_PURPLE, COLOR_WHITE_W } from "../../constants/colors";
+import { connect } from 'react-redux';
 
 class Home extends Component {
 
     constructor(props){
         super(props);
+    }
+
+    componentDidMount(){
+        console.log("user: ", this.props.user);
     }
 
     goToLogin(){
@@ -16,27 +22,62 @@ class Home extends Component {
         this.props.navigation.navigate('socialNetwork');
     }
 
+    eventos(){
+        if(this.props.user.isLoggedIn){
+            if(!this.props.user.premium){
+                Alert.alert('Debes comprar un plan premium')
+            }else {
+                Alert.alert('Funcionalidad en desarrollo');
+            }
+        }else {
+            Alert.alert('Debes iniciar sesión');
+        }
+    }
+
+    saludyrutas(){
+        if(this.props.user.isLoggedIn){
+            Alert.alert('Funcionalidad en desarrollo');
+        }else {
+            Alert.alert('Debes iniciar sesión');
+        }
+    }
+
     render() {
         return(
             <SafeAreaView style={styles.safeArea}>
+                <Header 
+                        isLoggedIn={this.props.user.isLoggedIn}
+                        name= {this.props.user.name}
+                        navigation={this.props.navigation}    
+                    />
                 <View style={{ flex: 1 }}>
                     <TouchableOpacity 
-                        onPress={() => this.goToLogin()} 
+                        onPress={() => this.saludyrutas()}
                         style={[styles.touchableLarge, {backgroundColor:COLOR_GREEN_LIGHT}]}><Text style={styles.text}>Tu Salud</Text></TouchableOpacity>
                     <View style={{ flex: 1, flexDirection:"row", backgroundColor: COLOR_WHITE_W }}>
                         <TouchableOpacity 
                             onPress={() => this.goToSocialNetwork()} 
                             style={[styles.touchableShort, {backgroundColor: COLOR_BLUE_LINK }]}><Text style={styles.text}>Red Social</Text></TouchableOpacity>
-                        <TouchableOpacity style={[styles.touchableShort, { backgroundColor: COLOR_ORANGE, marginRight: 10 }]}><Text style={styles.text}>Rutas</Text></TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={() => this.saludyrutas()}
+                        style={[styles.touchableShort, { backgroundColor: COLOR_ORANGE, marginRight: 10 }]}><Text style={styles.text}>Rutas</Text></TouchableOpacity>
                     </View >
-                    <TouchableOpacity style={[styles.touchableLarge, {backgroundColor:COLOR_PURPLE}]}><Text style={styles.text}>Eventos</Text></TouchableOpacity>
+                    <TouchableOpacity 
+                    onPress={() => this.eventos()}
+                    style={[styles.touchableLarge, {backgroundColor:COLOR_PURPLE}]}><Text style={styles.text}>Eventos</Text></TouchableOpacity>
                 </View>
             </SafeAreaView>
         );
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth
+    };
+  }
+
+export default connect(mapStateToProps)(Home);
 
 const styles = StyleSheet.create({
     safeArea:{
