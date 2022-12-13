@@ -10,8 +10,8 @@ class Card extends Component {
 
     render() {
         return(
-            <View key={this.props.key} style={[styles.shadow, styles.container]}>
-                <View style={styles.header}>
+            <View key={this.props.key} style={[styles.shadow, styles.container]} testID="view-card">
+                <View style={styles.header} testID="card-info1">
                     {this.props.user ?
                         <View style={styles.flexRow}>
                             <Image
@@ -26,14 +26,14 @@ class Card extends Component {
                         <View/>
                     }
                     {this.props.user && this.props.isLoggedIn ?
-                        <TouchableOpacity 
+                        <TouchableOpacity testID="btn-seguir"
                             style={styles.touchFollow}
                             onPress={() => this.props.navigation.openDrawer()}>
                             <Text style={styles.textFollow}>Seguir</Text>
                         </TouchableOpacity>: null
                     }
                     {!this.props.user ?
-                        <TouchableOpacity 
+                        <TouchableOpacity testID="btn-editar"
                             onPress={this.props.onPress} 
                             style={[styles.shadow, styles.touchCircleButtonEdit]}>
                             <Image
@@ -49,8 +49,8 @@ class Card extends Component {
                 />
                 <Text>{this.props.description}</Text>
                 {this.props.isLoggedIn ?
-                    <View style={styles.flexRow}>
-                        <TouchableOpacity 
+                    <View style={styles.flexRow} testID="card-info2">
+                        <TouchableOpacity testID="btn-like"
                             onPress={this.props.onPress} 
                             style={[styles.shadow, styles.touchCircleButton]}>
                             <Image
@@ -61,7 +61,7 @@ class Card extends Component {
                         {this.props.premium ?
                             <View style={[styles.flexRow, styles.justify]}>
                                 <View style={styles.flexRow}>
-                                    <TouchableOpacity 
+                                    <TouchableOpacity testID="btn-share"
                                         onPress={this.props.onPress} 
                                         style={[styles.shadow, styles.touchCircleButton]}>
                                         <Image
@@ -69,7 +69,7 @@ class Card extends Component {
                                             source={require('../../images/share.png')}
                                         />
                                     </TouchableOpacity>
-                                    <TouchableOpacity 
+                                    <TouchableOpacity testID="btn-comentar"
                                         onPress={this.props.onPress} 
                                         style={[styles.shadow, styles.touchCircleButton]}>
                                         <Image
@@ -79,7 +79,7 @@ class Card extends Component {
                                     </TouchableOpacity>
                                 </View>
                                 {this.props.myPublication ?
-                                    <TouchableOpacity 
+                                    <TouchableOpacity testID="btn-remove"
                                         onPress={this.props.onPress} 
                                         style={[styles.shadow, styles.touchCircleButtonRem]}>
                                         <Image
