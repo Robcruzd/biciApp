@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Dimensions, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { Dimensions, SafeAreaView, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import Header from "../../components/header/Index";
 import ImageButton from "../../components/imageButton/Index";
