@@ -88,7 +88,7 @@ class DrawerOptions extends Component {
                                 <Text style={{fontSize: 15, textAlignVertical: 'center'}}>Mis publicaciones</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                onPress= { () => this.props.navigation.navigate("login")}
+                                onPress= { () => {}}
                                 style={{ width: '100%', flexDirection: 'row', alignItems:'center', marginBottom:10 }}>
                                 <Image
                                         style={styles.image}
@@ -97,7 +97,7 @@ class DrawerOptions extends Component {
                                 <Text style={{fontSize: 15, textAlignVertical: 'center'}}>Seguidores</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                onPress= { () => this.props.navigation.navigate("login")}
+                                onPress= { () => {}}
                                 style={{ width: '100%', flexDirection: 'row', alignItems:'center', marginBottom:10 }}>
                                 <Image
                                         style={styles.image}

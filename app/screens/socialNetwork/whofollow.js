@@ -50,7 +50,10 @@ class WhoFollow extends Component {
     render(){
         return(
             <SafeAreaView style={{ flex: 1, backgroundColor: COLOR_WHITE_W }}>
-                <Header/>
+                <Header 
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    name= {this.props.user.name}
+                    navigation={this.props.navigation}/>
                 <View style={{flexWrap:"wrap", flexDirection:"row"}}>
                     {this.button()}
                 </View>

@@ -54,6 +54,7 @@ describe("<Card />", () => {
         myPublication:false,
         navigation:null
       };
+      
     const props4 = {
         keyId : "1",
         user: {
